@@ -16,6 +16,8 @@ if($_REQUEST['state'] == 'code'){
 }
 function curl_get($url,$header=[]){
     $curl = curl_init();
+    $t_vers = curl_version();
+    curl_setopt( $curl, CURLOPT_USERAGENT, 'curl/' . $t_vers['version'] );
     if(!empty($header)){
         curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
     }
