@@ -8,7 +8,8 @@ if($_REQUEST['state'] == 'code'){
     header("Accept:application/json");
     header("Location:".$url);
 }else if($_REQUEST['state'] == 'token'){
-    var_dump(file_get_contents("php://input"));
+    $response = file_get_contents("php://input");
+    error_log($response."\r\n",3,"response.log");
 }
 function postCurl($url,$post_data,$headers=[]){
     $ch = curl_init();
