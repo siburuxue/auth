@@ -1,4 +1,5 @@
 <?php
+echo json_encode($_REQUEST);
 $config = require_once("config.php");
 if($_REQUEST['state'] == 'code'){
     $code = $_REQUEST['code'];
@@ -7,5 +8,5 @@ if($_REQUEST['state'] == 'code'){
     $url = $url."?client_id=".$config['github']['app_id']."&client_secret=".$config['github']['app_secret']."&code=".$code."&redirect_uri=".urlencode($redirect_uri)."&state=token";
     header("Location:".$url);
 }else if($_REQUEST['state'] == 'token'){
-    echo json_encode($_REQUEST);
+
 }
