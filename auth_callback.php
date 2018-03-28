@@ -1,4 +1,5 @@
 <?php
+header("Content-Type:text/html");
 echo file_get_contents("php://input");
 $config = require_once("config.php");
 if($_REQUEST['state'] == 'code'){
