@@ -1,6 +1,5 @@
 <?php
 $config = require_once("config.php");
-var_dump(file_get_contents("php://input"));
 if($_REQUEST['state'] == 'code'){
     $code = $_REQUEST['code'];
     $url = "https://github.com/login/oauth/access_token";
@@ -9,7 +8,7 @@ if($_REQUEST['state'] == 'code'){
     header("Accept:application/json");
     header("Location:".$url);
 }else if($_REQUEST['state'] == 'token'){
-    echo json_encode($_REQUEST);
+    var_dump(file_get_contents("php://input"));
 }
 function postCurl($url,$post_data,$headers=[]){
     $ch = curl_init();
