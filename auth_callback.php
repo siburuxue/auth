@@ -1,5 +1,6 @@
 <?php
 $config = require_once("config.php");
+echo file_get_contents("php://input");
 if($_REQUEST['state'] == 'code'){
     $code = $_REQUEST['code'];
     $url = "https://github.com/login/oauth/access_token";
