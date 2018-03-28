@@ -7,7 +7,7 @@ if($_REQUEST['state'] == 'code'){
     $url = $url."?client_id=".$config['github']['app_id']."&client_secret=".$config['github']['app_secret']."&code=".$code."&redirect_uri=".urlencode($redirect_uri)."&state=token";
     header("Accept:application/json;Location:".$url);
 }else if($_REQUEST['state'] == 'token'){
-
+    echo json_encode($_REQUEST);
 }
 function postCurl($url,$post_data,$headers=[]){
     $ch = curl_init();
