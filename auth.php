@@ -6,4 +6,4 @@ $scope = "scope";
 $state = time();
 $allow_signup = true;
 $url = $url."?client_id=".$config['github']['app_id']."&redirect_uri=".urlencode($auth_redirect)."&scope=".$scope."&state=".$state."&allow_signup=".$allow_signup;
-header($url);
+header("Location: ".$url);
