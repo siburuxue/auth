@@ -7,7 +7,11 @@ if($_REQUEST['state'] == 'code'){
     $url = $url."?client_id=".$config['github']['app_id']."&client_secret=".$config['github']['app_secret']."&code=".$code."&redirect_uri=".urlencode($redirect_uri)."&state=token";
     $header = ['Accept:application/json'];
     $data = curl_get($url,$header);
-    echo $data;
+    $data = json_decode($data,true);
+    $token = $data['token'];
+    $user_info = "https://api.github.com/user?token=".$token;
+    $rs = curl_get($user_info);
+    echo $rs;
 }
 function curl_get($url,$header=[]){
     $curl = curl_init();
