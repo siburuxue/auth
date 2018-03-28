@@ -9,7 +9,7 @@ if($_REQUEST['state'] == 'code'){
     $data = curl_get($url,$header);
     $data = json_decode($data,true);
     $token = $data['token'];
-    $user_info = "https://api.github.com/user?token=".$token;
+    $user_info = "https://api.github.com/user?access_token=".$token;
     $rs = curl_get($user_info);
     echo $rs;
 }
