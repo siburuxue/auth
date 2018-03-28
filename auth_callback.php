@@ -9,8 +9,8 @@ if($_REQUEST['state'] == 'code'){
     $data = curl_get($url,$header);
     $data = json_decode($data,true);
     $token = $data['token'];
-    $user_info = "https://api.github.com/user?username=".$token;
-    $header = ['User-Agent:siburuxue','Accept:application/vnd.github.jean-grey-preview+json'];
+    $user_info = "https://api.github.com/user?access_token=".$token;
+    $header = ['User-Agent:siburuxue'];
     $rs = curl_get($user_info,$header);
     echo $rs;
 }
