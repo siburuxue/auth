@@ -10,17 +10,15 @@ if($_REQUEST['state'] == 'code'){
     $data = json_decode($data,true);
     $token = $data['token'];
     $user_info = "https://api.github.com/user?access_token=".$token;
-    $header = ['Authorization: token '.$token];
-    $rs = curl_get($user_info,$header);
+    $rs = curl_get($user_info);
     echo $rs;
 }
 function curl_get($url,$header=[]){
     $curl = curl_init();
-    $t_vers = curl_version();
-    curl_setopt( $curl, CURLOPT_USERAGENT, 'curl/' . $t_vers['version'] );
     if(!empty($header)){
         curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
     }
+    curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_HEADER, 0);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
