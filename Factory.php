@@ -22,6 +22,6 @@ class Factory
     }
 
     public function create(){
-        return new $this->type();
+        return new $this->type;
     }
 }
