@@ -1,9 +1,29 @@
 <?php
-$config = require_once("config.php");
-$url = "https://github.com/login/oauth/authorize";
-$auth_redirect = "http://auth.siburuxue.com/auth_callback.php";
-$scope = "scope";
-$state = 'code';
-$allow_signup = true;
-$url = $url."?client_id=".$config['github']['app_id']."&redirect_uri=".urlencode($auth_redirect)."&scope=".$scope."&state=".$state."&allow_signup=".$allow_signup;
-header("Location: ".$url);
+namespace ZP;
+abstract class Auth{
+
+    protected $config;
+
+    public function __construct()
+    {
+        $this->config = require_once('config.php');
+    }
+
+    abstract public function send();
+
+    abstract public function getInfo($data);
+
+    public function curl_get($url,$header=[]){
+        $curl = curl_init();
+        if(!empty($header)){
+            curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
+        }
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $data = curl_exec($curl);
+        curl_close($curl);
+        return $data;
+    }
+}
