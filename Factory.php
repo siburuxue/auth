@@ -21,7 +21,7 @@ class Factory
     }
 
     public function create(){
-        $reflect= new \ReflectionClass($this->type);
+        $reflect= new ReflectionClass($this->type);
         var_dump($reflect);
         $this->obj = $reflect->getConstants();
         return $this;
