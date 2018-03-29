@@ -28,7 +28,8 @@ class Factory
     }
 
     public function create(){
-        $this->obj = new \ReflectionMethod($this->type);
+        $reflect= new \ReflectionClass($this->type);
+        $this->obj = $reflect->getConstants();
         return $this;
     }
 
