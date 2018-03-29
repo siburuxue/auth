@@ -13,7 +13,7 @@ abstract class Auth{
 
     abstract public function getInfo($data);
 
-    public function curl_get($url,$header=[]){
+    protected function curl_get($url,$header=[]){
         $curl = curl_init();
         if(!empty($header)){
             curl_setopt($curl,CURLOPT_HTTPHEADER,$header);

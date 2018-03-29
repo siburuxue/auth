@@ -18,17 +18,17 @@ class Github extends Auth
         header("Location: ".$url);
     }
 
-    public function getInfo($data)
+    public function getInfo($args)
     {
-        $code = $_REQUEST['code'];
+        $code = $args['code'];
         $url = $this->config['Github']['token_url']."?client_id=".$this->config['Github']['app_id']."&client_secret=".$this->config['Github']['app_secret']."&code=".$code."&redirect_uri=".urlencode($this->config['Github']['auth_callback'])."&state=token";
         $header = ['Accept:application/json'];
-        $data = curl_get($url,$header);
+        $data = $this->curl_get($url,$header);
         $data = json_decode($data,true);
         $token = $data['access_token'];
         $user_info = $this->config['Github']['user_url'].$token;
         $header = ['User-Agent:qlxdj'];
-        $rs = curl_get($user_info,$header);
+        $rs = $this->curl_get($user_info,$header);
         return json_decode($rs);
     }
 }
