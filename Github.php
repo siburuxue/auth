@@ -15,6 +15,7 @@ class Github extends Auth
         $state = 'Github';
         $allow_signup = true;
         $url = $this->config['Github']['auth_url']."?client_id=".$this->config['Github']['app_id']."&redirect_uri=".urlencode($this->config['Github']['auth_callback'])."&scope=".$scope."&state=".$state."&allow_signup=".$allow_signup;
+        echo $url;
         header("Location: ".$url);
     }
 
