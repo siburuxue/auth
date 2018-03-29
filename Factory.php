@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 谦离解鼎节
- * Date: 2018/3/29
- * Time: 22:30
- */
-
 namespace ZP;
 
 spl_autoload_register(function ($class_name) {
@@ -29,8 +22,8 @@ class Factory
 
     public function create(){
         $reflect= new \ReflectionClass($this->type);
+        var_dump($reflect);
         $this->obj = $reflect->getConstants();
-        var_dump($this->obj);
         return $this;
     }
 
