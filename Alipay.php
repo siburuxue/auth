@@ -22,20 +22,25 @@ class Alipay extends Auth
 
     public function getInfo($args)
     {
-        $time = date('Y-m-d H:i:s');
         $code = $args['auth_code'];
         $data = [
             'app_id' => $this->config['Alipay']['app_id'],
             'method' => "alipay.system.oauth.token",
             'charset' => "utf-8",
             'sign_type' => "RSA2",
-            'timestamp' => $time,
+            'timestamp' => date('Y-m-d H:i:s'),
             'version' => "1.0",
             'grant_type' => "authorization_code",
             'code' => $code,
         ];
         ksort($data);
-        $str = http_build_query($data);
+        $str = "";
+        foreach ($data as $k => $v){
+            $str .= "{$k}={$v}";
+            if($k != count($data) - 1){
+                $str .= "&";
+            }
+        }
         echo $str;exit;
         $sign = "";
         openssl_sign($str, $sign, openssl_pkey_get_private($this->config['Alipay']['private_key']),OPENSSL_ALGO_SHA256 );
