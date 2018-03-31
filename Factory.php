@@ -2,7 +2,7 @@
 namespace ZP;
 
 require_once "./Github.php";
-use ZP\Github;
+use ZP\Github as Github;
 class Factory
 {
     private $type;
