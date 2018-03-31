@@ -15,7 +15,7 @@ class Factory
     }
 
     public function __call($name,$args){
-        $this->execute($name,$args);
+        return $this->execute($name,$args);
     }
 
     public function create(){
