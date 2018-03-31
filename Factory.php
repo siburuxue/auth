@@ -20,15 +20,10 @@ class Factory
     }
 
     public function create(){
-        try{
-            $reflect= new \ReflectionClass(new $this->type);
-            $this->obj = $reflect->getConstants();
-            return $this;
-        }catch (\Exception $e){
-            var_dump($e);
-        }finally{
-            return $this;
-        }
+        $reflect= new \ReflectionClass(new $this->type);
+        $this->obj = $reflect->getConstants();
+        var_dump($this->obj);
+        return $this;
     }
 
     public function execute($name,$args){
