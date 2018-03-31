@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 谦离解鼎节
- * Date: 2018/3/29
- * Time: 22:14
- */
-
 namespace ZP;
 
 require_once "Auth.php";
