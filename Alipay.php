@@ -45,11 +45,10 @@ class Alipay extends Auth
             $i++;
         }
         $private_key = "-----BEGIN RSA PRIVATE KEY-----\n" .
-            wordwrap($this->config['Alipay']['private_key'], 64, "\n", true) .
+            $this->config['Alipay']['private_key'].
             "\n-----END RSA PRIVATE KEY-----";
-        openssl_sign($str, $sign, $private_key,OPENSSL_ALGO_SHA256 );
+        openssl_sign($str, $sign, openssl_pkey_get_private($private_key),OPENSSL_ALGO_SHA256 );
         $sign = base64_encode($sign);
-        $sign = urlencode($sign);
         $data['sign'] = $sign;
         $param = http_build_query($data);
         error_log($param."\n",3,'query.log');
