@@ -34,7 +34,16 @@ class Alipay extends Auth
             'code' => $code,
         ];
         ksort($data);
-        $str = http_build_query($data);
+        $i = 0;
+        $str = '';
+        foreach ($data as $k => $v) {
+            if ($i == 0) {
+                $str .= "$k" . "=" . urlencode($v);
+            } else {
+                $str .= "&" . "$k" . "=" . urlencode($v);
+            }
+            $i++;
+        }
         $private_key = "-----BEGIN RSA PRIVATE KEY-----\n" .
             wordwrap($this->config['Alipay']['private_key'], 64, "\n", true) .
             "\n-----END RSA PRIVATE KEY-----";
