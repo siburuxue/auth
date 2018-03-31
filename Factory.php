@@ -19,12 +19,10 @@ class Factory
     }
 
     public function create(){
-        $obj = new Github();
-        var_dump($obj);
-//        $reflect= new \ReflectionClass(new $this->type);
-//        $this->obj = $reflect->getConstants();
-//        var_dump($this->obj);
-//        return $this;
+        $reflect= new \ReflectionClass(new $this->type);
+        $this->obj = $reflect->getConstants();
+        var_dump($this->obj);
+        return $this;
     }
 
     public function execute($name,$args){
