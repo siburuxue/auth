@@ -23,8 +23,8 @@ class Factory
     public function create(){
         try{
             $reflect= new \ReflectionClass(new Github());
-            var_dump($reflect);
             $this->obj = $reflect->getConstants();
+            var_dump($this->obj);
             return $this;
         }catch (\Exception $e){
             var_dump($e);
