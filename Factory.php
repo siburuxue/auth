@@ -21,10 +21,14 @@ class Factory
     }
 
     public function create(){
-        $reflect= new \ReflectionClass(new Github());
-        $this->obj = $reflect->getConstants();
-        var_dump($this->obj);
-        return $this;
+        try{
+            $reflect= new \ReflectionClass(new \ZP\Github());
+            $this->obj = $reflect->getConstants();
+            var_dump($this->obj);
+            return $this;
+        }catch (\Exception $e){
+            var_dump($e);
+        }
     }
 
     public function execute($name,$args){
