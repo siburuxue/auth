@@ -23,7 +23,6 @@ class Github extends Auth
 
     public function getInfo($args)
     {
-        echo json_encode($args);
         $code = $args['code'];
         $url = $this->config['Github']['token_url']."?client_id=".$this->config['Github']['app_id']."&client_secret=".$this->config['Github']['app_secret']."&code=".$code."&redirect_uri=".urlencode($this->config['Github']['auth_callback'])."&state=Github";
         $header = ['Accept:application/json'];
