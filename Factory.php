@@ -19,7 +19,8 @@ class Factory
     }
 
     public function create(){
-       return $this->obj = new $this->type;
+       $this->obj = new $this->type;
+        return $this;
     }
 
     public function execute($name,$args){
