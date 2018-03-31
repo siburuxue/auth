@@ -13,7 +13,7 @@ class Factory
 
     public function __construct($type)
     {
-        $this->type = "ZP\\".$type;
+        $this->type = "\\ZP\\".$type;
     }
 
     public function __call($name,$args){
@@ -23,8 +23,8 @@ class Factory
     public function create(){
         try{
             $reflect= new \ReflectionClass(new \ZP\Github());
+            var_dump($reflect);
             $this->obj = $reflect->getConstants();
-            var_dump($this->obj);
             return $this;
         }catch (\Exception $e){
             var_dump($e);
