@@ -24,8 +24,22 @@ class Alipay extends Auth
     public function getInfo($args)
     {
         $code = $args['auth_code'];
-        $token_url = $this->config['Alipay']['token_url']."?grant_type=authorization_code&code=".$code;
-        $token_rs = $this->curl_get($token_url);
+        $data = [
+            'app_id' => $this->config['Alipay']['app_id'],
+            'method' => "alipay.system.oauth.token",
+            'charset' => "utf-8",
+            'sign_type' => "RSA2",
+            'timestamp' => date('Y-m-d H:i:s'),
+            'version' => "1.0",
+            'grant_type' => "authorization_code",
+            'code' => $code,
+        ];
+        ksort($data);
+        $str = http_build_query($data);
+        openssl_sign($str, $sign, openssl_pkey_get_private($this->config['Alipay']['private_key']),OPENSSL_ALGO_SHA256 );
+        $sign = base64_encode($sign);
+        $data['sign'] = $sign;
+        $token_rs = $this->curl_post($this->config['Alipay']['token_url'],$data);
         echo $token_rs;
     }
 }

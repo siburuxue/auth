@@ -26,4 +26,19 @@ abstract class Auth{
         curl_close($curl);
         return $data;
     }
+
+    protected function curl_post($url,$post_data,$header=[]){
+        $ch = curl_init();
+        if(!empty($header)){
+            curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+        }
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post_data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
+    }
 }
