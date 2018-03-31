@@ -20,7 +20,6 @@ abstract class Auth{
             curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
         }
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($curl);
