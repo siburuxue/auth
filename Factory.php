@@ -2,6 +2,7 @@
 namespace ZP;
 
 require_once "Github.php";
+require_once "Alipay.php";
 
 class Factory
 {
