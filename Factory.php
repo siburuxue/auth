@@ -1,6 +1,8 @@
 <?php
 namespace ZP;
 
+require_once "./Github.php";
+use ZP\Github;
 class Factory
 {
     private $type;
@@ -9,7 +11,6 @@ class Factory
 
     public function __construct($type)
     {
-        require_once "$type.php";
         $this->type = $type;
     }
 
