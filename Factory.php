@@ -3,7 +3,8 @@ namespace ZP;
 
 require_once "./Github.php";
 use ZP\Github;
-
+$obj = new Github();
+var_dump($obj);
 class Factory
 {
     private $type;
