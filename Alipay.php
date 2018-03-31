@@ -34,14 +34,8 @@ class Alipay extends Auth
             'code' => $code,
         ];
         ksort($data);
-        $str = "";
-        foreach ($data as $k => $v){
-            $str .= "{$k}={$v}";
-            if($k != count($data) - 1){
-                $str .= "&";
-            }
-        }
-        echo $str;exit;
+        $str = http_build_query($data);
+        echo "<pre>".$str;exit;
         $sign = "";
         openssl_sign($str, $sign, openssl_pkey_get_private($this->config['Alipay']['private_key']),OPENSSL_ALGO_SHA256 );
         $sign = base64_encode($sign);
