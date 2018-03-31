@@ -23,7 +23,7 @@ class Factory
         return $this;
     }
 
-    public function execute($name,$args){
+    private function execute($name,$args){
         $reflectionClass = new \ReflectionClass($this->obj);
         if($reflectionClass->hasMethod($name)){
             $reflectionMethod = new \ReflectionMethod($this->obj,$name);
