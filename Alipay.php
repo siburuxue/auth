@@ -22,13 +22,14 @@ class Alipay extends Auth
 
     public function getInfo($args)
     {
+        $time = date('Y-m-d H:i:s');
         $code = $args['auth_code'];
         $data = [
             'app_id' => $this->config['Alipay']['app_id'],
             'method' => "alipay.system.oauth.token",
             'charset' => "utf-8",
             'sign_type' => "RSA2",
-            'timestamp' => date('Y-m-d H:i:s'),
+            'timestamp' => $time,
             'version' => "1.0",
             'grant_type' => "authorization_code",
             'code' => $code,
