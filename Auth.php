@@ -1,5 +1,6 @@
 <?php
 namespace ZP;
+
 abstract class Auth{
 
     protected $config;
