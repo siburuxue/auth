@@ -17,7 +17,6 @@ class Alipay extends Auth
         $scope = "auth_user";
         $state = 'Alipay';
         $url = $this->config['Alipay']['auth_url']."?app_id=".$this->config['Alipay']['app_id']."&redirect_uri=".urlencode($this->config['Alipay']['auth_callback'])."&scope=".$scope."&state=".$state;
-        echo $url;
         header("Location: ".$url);
     }
 
