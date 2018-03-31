@@ -23,6 +23,9 @@ class Alipay extends Auth
 
     public function getInfo($args)
     {
-        echo json_encode($args);
+        $code = $args['auth_code'];
+        $token_url = $this->config['Alipay']['token_url']."?grant_type=authorization_code&code=".$code;
+        $token_rs = $this->curl_get($token_url);
+        echo $token_rs;
     }
 }

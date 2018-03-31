@@ -12,7 +12,7 @@ return [
         'app_id' => '2018032702458499',
         'auth_url' => 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm',
         'auth_callback' => 'http://auth.siburuxue.com/auth_callback.php',
-        'token_url' => 'https://github.com/login/oauth/access_token',
+        'token_url' => 'https://openapi.alipay.com/gateway.do',
         'user_url' => 'https://api.github.com/user?access_token=',
     ]
 ];
