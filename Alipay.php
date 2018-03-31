@@ -33,27 +33,85 @@ class Alipay extends Auth
             'grant_type' => "authorization_code",
             'code' => $code,
         ];
-        ksort($data);
-        $i = 0;
-        $str = '';
-        foreach ($data as $k => $v) {
-            if ($i == 0) {
-                $str .= "$k" . "=" . urlencode($v);
-            } else {
-                $str .= "&" . "$k" . "=" . urlencode($v);
-            }
-            $i++;
-        }
-        $private_key = "-----BEGIN RSA PRIVATE KEY-----\n" .
-            $this->config['Alipay']['private_key'].
-            "\n-----END RSA PRIVATE KEY-----";
-        openssl_sign($str, $sign, openssl_pkey_get_private($private_key),OPENSSL_ALGO_SHA256 );
-        $sign = base64_encode($sign);
+        $sign = $this->rsaSign($data);
         $data['sign'] = $sign;
-        $param = http_build_query($data);
-        error_log($param."\n",3,'query.log');
-        $token_url = $this->config['Alipay']['token_url']."?".$param;
+        $data = http_build_query($data);
+        $token_url = $this->config['Alipay']['token_url']."?".$data;
         $token_rs = $this->curl_get($token_url);
-        echo $token_rs;
+        $token_rs = json_decode($token_rs,true);
+        $param = [
+            'app_id' => $this->config['Alipay']['app_id'],
+            'method' => "alipay.user.info.share",
+            'charset' => "utf-8",
+            'sign_type' => "RSA2",
+            'timestamp' => date('Y-m-d H:i:s'),
+            'version' => "1.0",
+            'grant_type' => "authorization_code",
+            'code' => $code,
+            'auth_token' => $token_rs['alipay_system_oauth_token_response']['access_token'],
+        ];
+        $sign = $this->rsaSign($param);
+        $param['sign'] = $sign;
+        $param = http_build_query($param);
+        $user_url = $this->config['Alipay']['user_url']."?".$param;
+        $user_rs = $this->curl_get($user_url);
+        return json_decode($user_rs,true);
+    }
+
+    public function rsaSign($params) {
+        return $this->sign($this->getSignContent($params));
+    }
+
+    protected function sign($data) {
+        $res = "-----BEGIN RSA PRIVATE KEY-----\n" .
+            wordwrap($this->config['Alipay']['private_key'], 64, "\n", true) .
+            "\n-----END RSA PRIVATE KEY-----";
+        ($res) or die('您使用的私钥格式错误，请检查RSA私钥配置');
+        openssl_sign($data, $sign, $res, OPENSSL_ALGO_SHA256);
+        $sign = base64_encode($sign);
+        return $sign;
+    }
+
+    public function getSignContent($params) {
+        ksort($params);
+        $stringToBeSigned = "";
+        $i = 0;
+        foreach ($params as $k => $v) {
+            if (false === $this->checkEmpty($v) && "@" != substr($v, 0, 1)) {
+
+                // 转换成目标字符集
+                $v = $this->characet($v, "UTF-8");
+
+                if ($i == 0) {
+                    $stringToBeSigned .= "$k" . "=" . "$v";
+                } else {
+                    $stringToBeSigned .= "&" . "$k" . "=" . "$v";
+                }
+                $i++;
+            }
+        }
+        unset ($k, $v);
+        return $stringToBeSigned;
+    }
+
+    protected function checkEmpty($value) {
+        if (!isset($value))
+            return true;
+        if ($value === null)
+            return true;
+        if (trim($value) === "")
+            return true;
+
+        return false;
+    }
+
+    function characet($data, $targetCharset) {
+        if (!empty($data)) {
+            $fileType = "UTF-8";
+            if (strcasecmp($fileType, $targetCharset) != 0) {
+                $data = mb_convert_encoding($data, $targetCharset, $fileType);
+            }
+        }
+        return $data;
     }
 }
