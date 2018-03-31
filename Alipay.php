@@ -36,7 +36,7 @@ class Alipay extends Auth
         $sign = $this->rsaSign($data);
         $data['sign'] = $sign;
         $data = http_build_query($data);
-        $token_url = $this->config['Alipay']['token_url']."?".$data;
+        $token_url = $this->config['Alipay']['gateway']."?".$data;
         $token_rs = $this->curl_get($token_url);
         $token_rs = json_decode($token_rs,true);
         $param = [
@@ -53,7 +53,7 @@ class Alipay extends Auth
         $sign = $this->rsaSign($param);
         $param['sign'] = $sign;
         $param = http_build_query($param);
-        $user_url = $this->config['Alipay']['user_url']."?".$param;
+        $user_url = $this->config['Alipay']['gateway']."?".$param;
         $user_rs = $this->curl_get($user_url);
         return json_decode($user_rs,true);
     }
