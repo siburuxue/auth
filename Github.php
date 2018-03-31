@@ -8,7 +8,7 @@
 
 namespace ZP;
 
-require_once "Auth.php";
+require_once "./Auth.php";
 use ZP\Auth;
 
 class Github extends Auth
