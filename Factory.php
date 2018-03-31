@@ -21,21 +21,24 @@ class Factory
     }
 
     public function create(){
-        try{
-            $reflect= new \ReflectionClass(new Github());
-            $this->obj = $reflect->getConstants();
-            var_dump($this->obj);
-            return $this;
-        }catch (\Exception $e){
-            var_dump($e);
-        }
+       return $this->obj = new $this->type;
     }
 
     public function execute($name,$args){
-        if(empty($args)){
-            $this->obj->invoke($name);
+        $reflectionClass = new \ReflectionClass($this->obj);
+        if($reflectionClass->hasMethod($name)){
+            $reflectionMethod = new \ReflectionMethod($this->obj,$name);
+            if($reflectionMethod->isPublic()){
+                if($reflectionMethod->isStatic()){
+                    $reflectionMethod->invoke(null,$args);
+                }else{
+                    $reflectionMethod->invoke($this->obj,$args);
+                }
+            }else{
+                throw new \Exception("The function:{$name} is not allowed access");
+            }
         }else{
-            $this->obj->invokeArgs($name,[$args]);
+            throw new \Exception("The function:{$name} is not exists");
         }
     }
 }
