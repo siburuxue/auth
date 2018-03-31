@@ -21,7 +21,7 @@ class Factory
 
     public function create(){
         try{
-            $reflect= new \ReflectionClass($this->type);
+            $reflect= new \ReflectionClass(new $this->type);
             $this->obj = $reflect->getConstants();
             return $this;
         }catch (\Exception $e){
