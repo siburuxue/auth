@@ -1,9 +1,9 @@
 <?php
 namespace ZP;
 
-spl_autoload_register(function ($name){
-    require_once $name.".php";
-});
+require_once "Github.php";
+use ZP\Github;
+
 
 class Factory
 {
@@ -22,7 +22,7 @@ class Factory
 
     public function create(){
         try{
-            $reflect= new \ReflectionClass(new \ZP\Github());
+            $reflect= new \ReflectionClass(new Github());
             var_dump($reflect);
             $this->obj = $reflect->getConstants();
             return $this;
