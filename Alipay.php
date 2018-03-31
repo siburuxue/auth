@@ -39,6 +39,7 @@ class Alipay extends Auth
         $sign = base64_encode($sign);
         $data['sign'] = $sign;
         $param = http_build_query($data);
+        echo $param;exit;
         $token_url = $this->config['Alipay']['token_url']."?".$param;
         $token_rs = $this->curl_get($token_url);
         echo $token_rs;
