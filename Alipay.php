@@ -35,12 +35,11 @@ class Alipay extends Auth
         ];
         ksort($data);
         $str = http_build_query($data);
-        error_log($str,3,'query.log');
         openssl_sign($str, $sign, openssl_pkey_get_private($this->config['Alipay']['private_key']),OPENSSL_ALGO_SHA256 );
         $sign = base64_encode($sign);
         $data['sign'] = $sign;
         $param = http_build_query($data);
-        echo $param;exit;
+        error_log($param."\n",3,'query.log');
         $token_url = $this->config['Alipay']['token_url']."?".$param;
         $token_rs = $this->curl_get($token_url);
         echo $token_rs;
