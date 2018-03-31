@@ -49,6 +49,7 @@ class Alipay extends Auth
             "\n-----END RSA PRIVATE KEY-----";
         openssl_sign($str, $sign, $private_key,OPENSSL_ALGO_SHA256 );
         $sign = base64_encode($sign);
+        $sign = urlencode($sign);
         $data['sign'] = $sign;
         $param = http_build_query($data);
         error_log($param."\n",3,'query.log');
