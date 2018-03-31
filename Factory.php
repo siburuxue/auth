@@ -1,9 +1,9 @@
 <?php
 namespace ZP;
 
-require_once "Github.php";
-use ZP\Github;
-
+spl_autoload_register(function ($name){
+    require_once "$name.php";
+});
 
 class Factory
 {
