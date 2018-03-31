@@ -26,7 +26,6 @@ class Github extends Auth
         $user_info = $this->config['Github']['user_url'].$token;
         $header = ['User-Agent:qlxdj'];
         $rs = $this->curl_get($user_info,$header);
-        echo $rs;exit;
         return json_decode($rs);
     }
 }

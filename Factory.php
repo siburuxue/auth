@@ -29,9 +29,9 @@ class Factory
             $reflectionMethod = new \ReflectionMethod($this->obj,$name);
             if($reflectionMethod->isPublic()){
                 if($reflectionMethod->isStatic()){
-                    return $reflectionMethod->invokeArgs(null,[$args]);
+                    return $reflectionMethod->invokeArgs(null,$args);
                 }else{
-                    return $reflectionMethod->invokeArgs($this->obj,[$args]);
+                    return $reflectionMethod->invokeArgs($this->obj,$args);
                 }
             }else{
                 throw new \Exception("The function:{$name} is not allowed access");
