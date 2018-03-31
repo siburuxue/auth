@@ -2,9 +2,7 @@
 namespace ZP;
 
 require_once "./Github.php";
-use ZP\Github;
-$obj = new Github();
-var_dump($obj);
+
 class Factory
 {
     private $type;
@@ -21,7 +19,7 @@ class Factory
     }
 
     public function create(){
-        $reflect= new \ReflectionClass(new $this->type);
+        $reflect= new \ReflectionClass(new $this->type());
         $this->obj = $reflect->getConstants();
         var_dump($this->obj);
         return $this;
