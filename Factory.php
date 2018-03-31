@@ -1,8 +1,10 @@
 <?php
 namespace ZP;
 
-spl_autoload_register();
-
+spl_autoload_register(function ($name){
+    require_once "$name.php";
+});
+var_dump(new Github());
 class Factory
 {
     private $type;
