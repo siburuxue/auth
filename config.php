@@ -21,7 +21,7 @@ return [
         'auth_url' => 'https://accounts.google.com/o/oauth2/v2/auth',
         'scope' => "https://www.googleapis.com/auth/drive.metadata.readonly",
         'auth_callback' => 'http://auth.siburuxue.com/auth_callback.php',
-        'token_url' => 'https://github.com/login/oauth/access_token',
+        'token_url' => 'https://www.googleapis.com/oauth2/v4/token',
         'user_url' => 'https://api.github.com/user?access_token=',
     ],
 ];

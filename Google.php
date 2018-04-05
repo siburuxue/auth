@@ -13,6 +13,18 @@ class Google extends Auth
 
     public function getInfo($args)
     {
-        echo json_encode($args);
+        $code = $args['code'];
+//        $token_url = $this->config['Google']['token_url']."?code=".$code."&client_id=".$this->config['Google']['app_id']."&client_secret=".$this->config['Google']['app_secret']."&redirect_uri=".urlencode($this->config['Google']['auth_callback'])."&grant_type=authorization_code";
+//        $token_rs = $this->curl_get($token_url);
+        $token_url = $this->config['Google']['token_url'];
+        $data = [
+            'code' => $code,
+            'client_id' => $this->config['Google']['app_id'],
+            'client_secret' => $this->config['Google']['app_secret'],
+            'redirect_uri' => urlencode($this->config['Google']['auth_callback']),
+            'grant_type' => 'authorization_code',
+        ];
+        $token_rs = $this->curl_post($token_url,$data);
+        echo $token_rs;
     }
 }
