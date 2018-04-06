@@ -1,10 +1,6 @@
 <?php
 namespace ZP;
 
-require_once "Github.php";
-require_once "Alipay.php";
-require_once "Google.php";
-
 class Factory
 {
     private $type;
@@ -13,6 +9,8 @@ class Factory
 
     public function __construct($type)
     {
+        $file_name = $type.".php";
+        require_once $file_name;
         $this->type = "\\ZP\\".$type;
     }
 

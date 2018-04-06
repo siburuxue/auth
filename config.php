@@ -24,4 +24,13 @@ return [
         'token_url' => 'https://www.googleapis.com/oauth2/v4/token',
         'user_url' => 'https://api.github.com/user?access_token=',
     ],
+    'Baidu' => [
+        'app_id' => "8nyMgeEF8kIvS2b5Zi1Yeqg0",
+        'app_secret' => "7YXBEE0SCruyK3biQcsUVZhDA8IVAbT5",
+        'auth_url' => 'https://openapi.baidu.com/oauth/2.0/authorize',
+        'scope' => "email",
+        'auth_callback' => 'http://auth.siburuxue.com/auth_callback.php',
+        'token_url' => 'https://openapi.baidu.com/oauth/2.0/token',
+        'user_url' => 'https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=',
+    ]
 ];
