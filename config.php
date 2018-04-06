@@ -32,5 +32,14 @@ return [
         'auth_callback' => 'http://auth.siburuxue.com/auth_callback.php',
         'token_url' => 'https://openapi.baidu.com/oauth/2.0/token',
         'user_url' => 'https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=',
+    ],
+    'Weibo' => [
+        'app_id' => "2742648849",
+        'app_secret' => "2469c6c72cdfbbc60e5fe5f966a04a6f",
+        'auth_url' => 'https://openapi.baidu.com/oauth/2.0/authorize',
+        'scope' => "email",
+        'auth_callback' => 'http://auth.siburuxue.com/auth_callback.php',
+        'token_url' => 'https://openapi.baidu.com/oauth/2.0/token',
+        'user_url' => 'https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=',
     ]
 ];
